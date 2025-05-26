@@ -1,0 +1,36 @@
+{
+	"name": "blobdata",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Bloblinkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "EmpData.csv",
+				"container": "demo1data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": false,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "1",
+				"type": "String"
+			},
+			{
+				"name": "John",
+				"type": "String"
+			},
+			{
+				"name": "SMITH ",
+				"type": "String"
+			}
+		]
+	}
+}
