@@ -1,0 +1,77 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "demoadfsource"
+		},
+		"Bloblinkedservice_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Bloblinkedservice'"
+		},
+		"SqlLinkedService_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlLinkedService'"
+		},
+		"SqlLinkedService_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "rgslserver.database.windows.net"
+		},
+		"SqlLinkedService_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "rgsqldatabase"
+		},
+		"SqlLinkedService_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "Patanirfan"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "demoadfsource_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"Bloblinkedservice_connectionString": {
+						"value": "[parameters('Bloblinkedservice_connectionString')]"
+					},
+					"SqlLinkedService_password": {
+						"value": "[parameters('SqlLinkedService_password')]"
+					},
+					"SqlLinkedService_properties_typeProperties_server": {
+						"value": "[parameters('SqlLinkedService_properties_typeProperties_server')]"
+					},
+					"SqlLinkedService_properties_typeProperties_database": {
+						"value": "[parameters('SqlLinkedService_properties_typeProperties_database')]"
+					},
+					"SqlLinkedService_properties_typeProperties_userName": {
+						"value": "[parameters('SqlLinkedService_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
